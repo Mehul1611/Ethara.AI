@@ -1,0 +1,84 @@
+# Full-Stack Coding Assignment – Team Task Manager
+
+# **Overview**
+
+You are required to design and develop a Team Task Management Web Application.
+
+This assignment evaluates your full-stack development skills including frontend, backend, database design, authentication, and deployment.
+
+The goal is to build a real-world collaborative application where multiple users can manage tasks efficiently.
+
+# **Problem Statement**
+
+Build a web application where users can create and join projects, assign tasks, and track progress.
+
+Each user should have a role (Admin or Member), and tasks should be manageable within teams.
+
+Think of it as a simplified version of tools like Trello or Asana.
+
+# **Functional Requirements**
+
+## **1\. User Authentication**
+
+• Signup with Name, Email, Password  
+• Secure login (JWT or session-based)
+
+## **2\. Project Management**
+
+• Create projects (creator becomes Admin)  
+• Admin can add/remove members  
+• Members can view assigned projects
+
+## **3\. Task Management**
+
+• Create tasks (Title, Description, Due Date, Priority)  
+• Assign tasks to users  
+• Update status (To Do, In Progress, Done)
+
+## **4\. Dashboard**
+
+• Total tasks  
+• Tasks by status  
+• Tasks per user  
+• Overdue tasks
+
+## **5\. Role-Based Access**
+
+Admin:  
+• Manage tasks and users
+
+Member:  
+• View and update assigned tasks only
+
+# **Backend & Database Requirements**
+
+• RESTful APIs  
+• Database (SQL or NoSQL)  
+• Proper relationships (Users, Projects, Tasks)  
+• Validations and error handling
+
+# **Deployment (Mandatory)**
+
+Deploy your full-stack application using Railway.
+
+• Application must be publicly accessible  
+• Backend and frontend must be connected  
+• Use environment variables properly
+
+# **Submission Requirements**
+
+• Live application URL  
+• GitHub repository  
+• README with setup and deployment steps  
+
+# **Time Expectation**
+
+Estimated effort: 8–12 hours  
+Recommended timeline: 1–2 days
+
+# **Important Notes**
+
+• Deployment is mandatory  
+• Non-working applications will not be evaluated  
+• Candidates must be able to explain their code
+
