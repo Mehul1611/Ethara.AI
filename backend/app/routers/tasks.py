@@ -34,7 +34,7 @@ def update_task(
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Can only update tasks assigned to you")
         if "assignee_id" in data:
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Cannot reassign tasks")
-        allowed = {"title", "description", "due_date", "priority", "status"}
+        allowed = {"status"}
         data = {k: v for k, v in data.items() if k in allowed}
     else:
         if "assignee_id" in data and data["assignee_id"] is not None:

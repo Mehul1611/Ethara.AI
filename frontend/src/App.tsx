@@ -14,21 +14,20 @@ function Shell({ children }: { children: ReactNode }) {
         <div className="topbar-inner">
           <div className="row">
             <span className="brand">Team Tasks</span>
-            {user ? <Link to="/projects">Projects</Link> : null}
           </div>
-        {user ? (
-          <div className="row">
-            <span className="muted">{user.email}</span>
-            <button className="btn" type="button" onClick={logout}>
-              Log out
-            </button>
-          </div>
-        ) : (
-          <div className="row">
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
-          </div>
-        )}
+          {user ? (
+            <div className="row">
+              <span className="muted">{user.email}</span>
+              <button className="btn" type="button" onClick={logout}>
+                Log out
+              </button>
+            </div>
+          ) : (
+            <div className="row">
+              <Link to="/login">Login</Link>
+              <Link to="/register">Register</Link>
+            </div>
+          )}
         </div>
       </div>
       {children}
@@ -65,6 +64,14 @@ export default function App() {
             />
             <Route
               path="/projects/:projectId"
+              element={
+                <RequireAuth>
+                  <Navigate to="dashboard" replace />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/projects/:projectId/:tab"
               element={
                 <RequireAuth>
                   <ProjectPage />

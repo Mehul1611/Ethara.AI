@@ -58,21 +58,20 @@ export default function ProjectsPage() {
         </form>
       </div>
       {err ? <div className="err">{err}</div> : null}
-      <div className="card">
-        <h2 className="subtitle">Your projects</h2>
-        {items.length === 0 ? (
-          <p className="muted">No projects yet.</p>
-        ) : (
-          <ul className="project-list">
-            {items.map((p) => (
-              <li key={p.id}>
-                <Link to={`/projects/${p.id}`}>{p.name}</Link>
-                {p.description ? <span className="muted"> — {p.description}</span> : null}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      <h2 className="subtitle">Your projects</h2>
+      {items.length === 0 ? (
+        <p className="muted">No projects yet.</p>
+      ) : (
+        <div className="project-grid">
+          {items.map((p) => (
+            <Link key={p.id} to={`/projects/${p.id}/dashboard`} className="project-card">
+              <h3 className="project-card-title">{p.name}</h3>
+              {p.description ? <p className="project-card-desc">{p.description}</p> : <p className="project-card-desc muted">No description</p>}
+              <span className="project-card-cta">Open project →</span>
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
