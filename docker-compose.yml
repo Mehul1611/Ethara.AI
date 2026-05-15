@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ethara
+    ports:
+      - "5432:5432"
+    volumes:
+      - ethara_pg:/var/lib/postgresql/data
+
+volumes:
+  ethara_pg:
