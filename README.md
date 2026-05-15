@@ -1,77 +1,93 @@
-# Ethara — Team Task Manager
+# TaskFlow — Team Task Manager
 
-Full-stack app: **FastAPI** (REST + JWT + PostgreSQL) and **Vite + React** UI. Production build serves the SPA from the same process as the API (no CORS issues when deployed as one service).
+A modern, full-stack task management application designed for teams. Collaborate seamlessly with real-time task updates, role-based access control, and an intuitive interface.
 
-## Live URL
+## 🚀 Live Demo
 
-After you deploy to Railway, put your public URL here: `https://YOUR_APP.up.railway.app`
+**[https://taskflow-production-7521.up.railway.app/](https://taskflow-production-7521.up.railway.app/)**
 
-## RBAC
+Try it out by creating an account and inviting team members to a project.
 
-- **Admin:** project creator starts as admin. Admins add/remove members and create/delete/reassign tasks.
-- **Member:** can see project members and **all** tasks on the project (read-only visibility). They may **only PATCH** tasks where they are the assignee (title, description, due date, priority, status). Reassigning tasks is admin-only.
+---
 
-## Local development
+## ✨ Features
 
-### 1. PostgreSQL
+### User Management
+- **Authentication:** Secure JWT-based login and registration
+- **Project Ownership:** Create projects and manage team membership
+- **Role-Based Access Control (RBAC):**
+  - **Admin:** Full control — create/edit/delete tasks, manage team members, reassign work
+  - **Member:** View all tasks and edit only their assigned tasks
 
-Point `DATABASE_URL` at a Postgres instance (local Docker, cloud, etc.). Example:
+### Task Management
+- **Full Task Lifecycle:** Create, assign, update, and track tasks
+- **Rich Task Details:** 
+  - Title, description, priority levels
+  - Due dates and status tracking
+  - Task assignment to team members
+- **Permission-Based Editing:** Members can only modify tasks assigned to them
+- **Team Visibility:** See all project members and their assigned work at a glance
 
-`postgresql://postgres:postgres@localhost:5432/ethara`
+### Project Collaboration
+- **Multi-Member Projects:** Add team members and collaborate in real-time
+- **Organized Workspace:** Separate projects keep tasks organized
+- **Admin Controls:** Admins manage who can access the project
 
-### 2. Backend
+---
 
-```powershell
-cd backend
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-copy .env.example .env
-```
+## 🛠️ Tech Stack
 
-Edit `.env` with your `DATABASE_URL` and a strong `JWT_SECRET`.
+### Backend
+- **Framework:** FastAPI (Python)
+- **Database:** PostgreSQL
+- **Authentication:** JWT tokens
+- **ORM:** SQLAlchemy
 
-```powershell
-uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
-```
+### Frontend
+- **Framework:** React + Vite
+- **Styling:** Modern UI with responsive design
+- **Dev Server:** Built-in proxy to backend API
 
-Run this from the `backend` folder so the `app` package resolves. Tables are created on startup (`create_all`).
+### Deployment
+- **Docker:** Single containerized image
+- **Host:** Railway (PostgreSQL + Web Service)
+- **Architecture:** Full-stack SPA served from the same process
 
-### 3. Frontend
+---
 
-```powershell
-cd frontend
-npm install
-npm run dev
-```
+## 🎯 How It Works
 
-Open `http://localhost:5173`. The dev server proxies `/api`, `/docs`, `/openapi.json`, and `/health` to `http://127.0.0.1:8000`.
+1. **Sign up** and create your first project
+2. **Invite team members** by adding them to your project
+3. **Create tasks** and assign them to yourself or teammates
+4. **Update task status** as work progresses (members can edit their own tasks)
+5. **Stay organized** with priority levels, due dates, and descriptions
 
-## API docs
+---
 
-With the backend running: `http://127.0.0.1:8000/docs`
+## 📋 API Endpoints
 
-## Docker (single image)
+The application includes comprehensive REST APIs under `/api/v1`:
 
-From the repo root:
+- **Auth:** `POST /register`, `POST /login`
+- **Projects:** `GET`, `POST`, `PATCH`, `DELETE` projects
+- **Members:** Manage project team members
+- **Tasks:** Create, read, update tasks with proper permission checks
+- **Health:** `GET /health` for deployment verification
 
-```powershell
-docker build -t ethara .
-docker run --rm -p 8000:8000 -e DATABASE_URL=postgresql://... -e JWT_SECRET=... ethara
-```
+**Swagger Docs:** Available at `/docs` when the app is running
 
-`PORT` is honored (Railway sets it). The image copies the Vite build into `backend/static` inside the container so `GET /` serves the UI.
+## 🚢 Deployment
 
-## Railway
+TaskFlow is already live on Railway. To deploy your own version:
 
-1. Create a **PostgreSQL** plugin and copy its connection string into `DATABASE_URL` for the web service.
-2. Set `JWT_SECRET` to a long random value.
-3. Optional: `JWT_EXPIRE_MINUTES` (default `1440`), `CORS_ORIGINS` (comma-separated; for this single-service Docker layout you can use your public app URL or leave defaults for local-style values if you split services later).
-4. Deploy from GitHub using the **Dockerfile** at the repo root (or set root directory accordingly).
-5. Ensure the web service **public networking** is enabled and note the **HTTPS URL** for submission.
+1. Push to GitHub
+2. Connect to Railway
+3. Set `DATABASE_URL` and `JWT_SECRET` environment variables
+4. Done — Railway builds and deploys automatically from the Dockerfile
 
-## Repository layout
+---
 
-- `backend/app` — FastAPI app, SQLAlchemy models, routers under `/api/v1`
-- `frontend` — React SPA
-- `Dockerfile` — multi-stage Node build + Python runtime
+## 📝 License
+
+MIT
